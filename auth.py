@@ -17,7 +17,6 @@ def autho() :
     if not os.path.exists(directory):
         os.makedirs(directory)
     directory = os.path.join(directory,'token.pickl')
-    print('this th path' + directory)
     if os.path.exists(directory):
         with open(directory, 'rb') as token:
             creds = pickle.load(token)

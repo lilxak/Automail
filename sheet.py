@@ -2,8 +2,9 @@ import openpyxl as op
 
 def sheet_to_dict(path):
     ''' Inputs an excel workbook's path and returns a dictionary {'Column':[Rows]} '''
-    sheet = op.load_workbook(path)['Feuil1']
-    
+
+    name = op.load_workbook(path).sheetnames[0]
+    sheet = op.load_workbook(path)[name]
     output = {}
     col_names = [a.value for a in sheet[1]]
     for c in col_names:

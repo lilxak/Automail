@@ -1,4 +1,4 @@
-import eel,re
+import eel
 from send import send
 
 @eel.expose # Expose this function to Javascript

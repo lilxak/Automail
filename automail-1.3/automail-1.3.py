@@ -6,4 +6,4 @@ def sendMailPy(myLink,mySybject,myContent):
     return send(myLink,mySybject,myContent)
 
 eel.init('web')
-eel.start('index.html', size=(700,700))
+eel.start('index.html', size=(800,700))

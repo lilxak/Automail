@@ -1,66 +1,111 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Aiesec Babez Mailer</title>
+        <link rel="icon" type="image/gif/png" href="icone.png">
+        <script type="text/javascript" src="/eel.js"></script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">    
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+         <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Aiesec Babez Mailer</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <script type="text/javascript" src="/eel.js"></script>
-</head>
+    </head>
 
-<body style="width: 500px;height: 600px;">
-    <div class="text-center justify-content-center align-items-center align-content-center align-self-center flex-wrap" data-toggle="tooltip" data-bs-tooltip="" style="background-color: rgb(3,127,243);width: 670px;height: 550px;">
-        <img src="assets/img/loglo%201.png">
-        <form class="text-left justify-content-center align-items-center align-content-center align-self-center m-auto" style="height: 470px;width: 600px;padding-top: 35px;">
-            <div class="form-group">
-                <input placeholder="Link" class="bg-white border rounded shadow form-control" type="text" style="height: 40px;" name="myLink" id="myLink">
-            </div>
-            <div class="form-group">
-                <input placeholder="Subject" class="bg-white border rounded shadow form-control" type="text" style="height: 40px;" name="mySubject" id="mySubject">
-            </div>
-            <div class="form-group">
-                <textarea placeholder="Content" class="border rounded form-control" style="height: 300px;" name="myContent" id="myContent" ></textarea>
-            </div>
-            <div class="form-group">
-                <button onclick="sendMail()" class="btn btn-secondary text-center border rounded" type="button" style="width: 100%;height: 100%;font-size: 25px;" name="submit" id="submit">Send</button>
-            </div>
-        </form>
-    </div>
+    <body style="background-color: rgb(3,127,243)">
+        <div class="container">
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <img src="img/logo.png" class="mx-auto d-block">
+            </div>            
+            <form>
+                <div class="form-group">
+                    <input placeholder="Link" class="bg-white border rounded shadow form-control" 
+                    type="text" style="height: 40px;" name="myLink" id="myLink">
+                </div>
+                <div class="form-group">
+                    <input placeholder="Subject" class="bg-white border rounded shadow form-control"
+                    type="text" style="height: 40px;" name="mySubject" id="mySubject">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Content" class="border rounded form-control"
+                    name="myContent" id="myContent" ></textarea>
+                </div>
+                <div class="form-group">
+                    <button onclick="sendMail()" class="btn btn-secondary text-center border
+                     rounded" type="button" style="width: 100%;height: 100%;font-size: 25px;" 
+                     name="submit" id="submit">Send</button>
+                </div>
+            </form>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="alert " id="infos" role="alert" style="text-align: center;"></div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
 
-    <script src="summernote-bs4.js"></script>
-    <script>
-        $('#myContent').summernote();
-    </script>
-    <script type="text/javascript">
-        document.keypress(function(event){
-            var keycode = (event.keyCode ? event.keyCode : event.which);
-            if(keycode == '13'){
-                $("#submit").click();
+            </div>
+        </div>
+        <script>
+            var myheight = 270;
+            $(document).ready(function() {
+                $('#myContent').summernote({
+                    height:myheight,
+                    toolbar: [
+                        ['style', ['style']],
+                        ['font', ['bold', 'underline', 'clear']],
+                        ['fontname', ['fontname']],
+                        ['color', ['color']],
+                        ['para', ['ul', 'ol', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link']],
+                        ['view', ['fullscreen', 'codeview', 'help']],
+                    ],
+                });
+              });
+        </script>
+        <script type="text/javascript">
+            document.keypress(function(event){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    $("#submit").click();
+                }
+            });
+            function print_num(n) {
+                if(n==1){
+                    $('#infos').html('<h3>Sent successfully</h3>');
+                    $('#infos').addClass('alert-success');
+                    $('#myModal').modal('show');
+                }
+                else{
+                    $('#infos').html('<h3>Error</h3>');
+                    $('#infos').addClass('alert-danger');
+                    $('#myModal').modal('show');
+                }
             }
-        });
-        function print_num(n) {
-            if(n==1)
-                alert('done')
-            else
-                alert('error')
-        }
-        function sendMail(){
-            let myLink = document.querySelector("#myLink").value;
-            let mySubject = document.querySelector("#mySubject").value;
-            let myContent = document.querySelector("#myContent").value;
-            if(myLink=='' || myContent=='' || mySubject=='')
-            {
-                alert('There are empty fields !')
+            function sendMail(){
+                let myLink = document.querySelector("#myLink").value;
+                let mySubject = document.querySelector("#mySubject").value;
+                let myContent = document.querySelector("#myContent").value;
+                if(myLink=='' || myContent=='' || mySubject=='')
+                {
+                    //alert('There are empty fields !')
+                    $('#infos').html('<h3>There are empty fields !</h3>')
+                    $('#infos').addClass('alert-danger');
+                    $('#myModal').modal('show');
+                }
+                else{
+                    eel.sendMailPy(myLink,mySubject,myContent)(print_num);
+                }
+                
             }
-            else{
-                eel.sendMailPy(myLink,mySubject,myContent)(print_num);
-            }
-            
-        }
-    </script>
-    
-</body>
-
+        </script>
+        
+    </body>
 </html>

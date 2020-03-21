@@ -9,8 +9,7 @@ def send(myLink,mySybject,myContent):
     service = build('gmail', 'v1', credentials=autho())
     # Call the Gmail API
     results = service.users().labels().list(userId='me').execute()
-    dic = sheet_to_dict(myLink)
-    i = 0
+    dic = sheet_to_dict(myLink)gi
     if dic['Email'] != None:
         for email in dic['Email'] :
             if(email!=None): 

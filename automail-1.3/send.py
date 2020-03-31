@@ -1,11 +1,10 @@
 from sheet import sheet_to_dict
 from auth import autho
-from create_email import create_mail
 from create_email_with_attachments import create_message_with_attachment
 from send_email import send_mail
 from googleapiclient.discovery import build
 
-def send(myLink,mySybject,myContent):
+def send_all_mails(myLink,mySybject,myContent):
     service = build('gmail', 'v1', credentials=autho())
     # Call the Gmail API
     service.users().labels().list(userId='me').execute()

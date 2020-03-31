@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Aiesec Babez Mailer</title>
         <link rel="icon" type="image/gif/png" href="icone.png">
+        <link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="/eel.js"></script>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">    
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -11,16 +12,85 @@
          <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 
+        <style>
+            @font-face {
+                font-family: "oracleScript";
+                src: url("Oraqle_Script.ttf");
+            }
+        </style>
+        
     </head>
 
-    <body style="background-color: rgb(3,127,243)">
-        <div class="container">
+    <body style="background-color: #037ef3;font-family: Lato;">
+        <!---------------------- home ---------------------->
+        <div class="container" id="home" style="display: block;">
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <img src="img/logo.png" class="mx-auto d-block">
+            </div>
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <div >
+                    <p style="color: #fff;font-size: 6em;font-family: oracleScript;line-height: 1em;">
+                        Welcome To Aiesec Babez <br> Automailer !
+                    </p>
+                </div>
+                <div style="margin: 40px;">
+                    <p style="color: #fff;font-size: 2em;">
+                        Do you want to get emails from sheet or expa ?
+                    </p>
+                </div>
+                <div style="margin-top: 80px;">
+                    <button onclick="fromExpa()" class="btn btn-white text-center border rounded" 
+                        style="margin-right: 10px;height: 60px;width: 280px;" type="button">
+                        <p style="font-size: 2em;color: #000;">Expa</p>
+                    </button>
+                    <button onclick="fromSheet()" class="btn btn-white text-center border rounded" 
+                        style="margin-left: 10px;height: 60px;width: 280px;" type="button">
+                        <p style="font-size: 2em;color: #000">Sheet</p>
+                    </button>
+                </div>
+            </div>  
+        </div>
+
+        <!-----------------send mail from expa-------------->
+
+        <div class="container" id="expa" style="display: none;">
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <img src="img/logo.png" class="mx-auto d-block">
+            </div>
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <div style="margin: 40px;">
+                    <div style="margin-top: 40px;">
+                        <p style="color: #fff;font-size: 2em;">
+                            Put your token here 
+                        </p>
+                    </div>
+                    
+                    <div style="margin-top: 40px;">
+                        <input placeholder="Token" class="bg-white border rounded shadow form-control"  value=""
+                        type="text" style="height: 50px;width: 100%;margin-bottom: 20px;" name="myToken" id="myToken">
+                    </div>
+                
+                    <div class="text-center" style="margin-top: 40px;">
+                        <button onclick="expaToHome()" class="btn btn-white text-center border rounded" 
+                            style="height: 50px;width: 49%;margin-right: 5px;" type="button">
+                            <p style="font-size: 2em;color: #000">Back</p>
+                        </button>
+                        <button onclick="getEps()" class="btn btn-secondary text-center border rounded" 
+                            type="button" style="width: 49%;height: 50px;margin-left: 5px;" name="submit" id="submit">
+                            <p style="font-size: 2em;color: #000">Next</p>
+                        </button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <!-----------------send mail from sheet------------->
+        <div class="container" id="sheet" style="display: none;">
             <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
                 <img src="img/logo.png" class="mx-auto d-block">
             </div>            
             <form>
                 <div class="form-inline">
-                    <input placeholder="Link" class="bg-white border rounded shadow form-control"  value="C:"
+                    <input placeholder="Link" class="bg-white border rounded shadow form-control"  value=""
                     type="text" style="height: 40px;width: 84%;margin-bottom: 20px;" name="myLink" id="myLink">
                     <button onclick="getLink()" class="btn btn-secondary text-center border rounded" 
                      style="margin-bottom: 20px;height: 40px;width: 15%;" type="button">Browse sheet</button>
@@ -33,87 +103,34 @@
                     <textarea placeholder="Content" class="border rounded form-control"
                     name="myContent" id="myContent" ></textarea>
                 </div>
-                <div class="form-group">
-                    <button onclick="sendMail()" class="btn btn-secondary text-center border
-                     rounded" type="button" style="width: 100%;height: 100%;font-size: 25px;" 
-                     name="submit" id="submit">Send</button>
+                <div class="text-center">
+                    <button onclick="sheetToHome()" class="btn btn-white text-center border rounded" 
+                        style="height: 50px;width: 49%;margin-right: 5px;" type="button">
+                        <p style="font-size: 2em;color: #000">Back</p>
+                    </button>
+                     <button onclick="sendMail()" class="btn btn-secondary text-center border rounded" 
+                        type="button" style="width: 49%;height: 50px;margin-left: 5px;" name="submit" id="submit">
+                        <p style="font-size: 2em;color: #000">Send</p>
+                    </button>
                 </div>
             </form>
         </div>
+
+
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <div class="alert " id="infos" role="alert" style="text-align: center;"></div>
+                        <div class="alert alert-success" id="goodInfos" role="alert" style="text-align: center;"></div>
+                        <div class="alert alert-danger" id="badInfos" role="alert" style="text-align: center;"></div>
                         <div class="text-center">
                             <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <script>
-            var myheight = 270;
-            $(document).ready(function() {
-                $('#myContent').summernote({
-                    height:myheight,
-                    toolbar: [
-                        ['style', ['style']],
-                        ['font', ['bold', 'underline', 'clear']],
-                        ['fontname', ['fontname']],
-                        ['color', ['color']],
-                        ['para', ['ul', 'ol', 'paragraph']],
-                        ['table', ['table']],
-                        ['insert', ['link']],
-                        ['view', ['fullscreen', 'codeview', 'help']],
-                    ],
-                });
-              });
-        </script>
-        <script type="text/javascript">
-            document.keypress(function(event){
-                var keycode = (event.keyCode ? event.keyCode : event.which);
-                if(keycode == '13'){
-                    $("#submit").click();
-                }
-            });
-            function print_num(n) {
-                if(n==1){
-                    $('#infos').html('<h3>Sent successfully</h3>');
-                    $('#infos').addClass('alert-success');
-                    $('#myModal').modal('show');
-                }
-                else{
-                    $('#infos').html('<h3>Error</h3>');
-                    $('#infos').addClass('alert-danger');
-                    $('#myModal').modal('show');
-                }
-            }
-            function sendMail(){
-                let myLink = document.querySelector("#myLink").value;
-                let mySubject = document.querySelector("#mySubject").value;
-                let myContent = document.querySelector("#myContent").value;
-                if(myLink=='' || myContent=='' || mySubject=='')
-                {
-                    //alert('There are empty fields !')
-                    $('#infos').html('<h3>There are empty fields !</h3>')
-                    $('#infos').addClass('alert-danger');
-                    $('#myModal').modal('show');
-                }
-                else{
-                    eel.sendMailPy(myLink,mySubject,myContent)(print_num);
-                }
-                
-            }
-            function p(n){
-                document.querySelector("#myLink").value = n;
-            }
-            function getLink(){
-                eel.fileDialog()(p);
-            }
-        </script>
-        
+        <script type="text/javascript" src="js/script.js"></script>
     </body>
 </html>

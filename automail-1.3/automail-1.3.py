@@ -18,4 +18,11 @@ def fileDialog():
     return name
 
 eel.init('web')
-eel.start('index.html', size=(800,700))
+
+try:
+    eel.start('index.html', size=(800,700))
+except OSError:
+    try:
+        eel.start('index.html', mode='firefox', size=(800,700))
+    except OSError:
+        eel.start('index.html', mode='edge', size=(800,700))

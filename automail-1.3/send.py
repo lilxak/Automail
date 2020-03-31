@@ -8,7 +8,7 @@ from googleapiclient.discovery import build
 def send(myLink,mySybject,myContent):
     service = build('gmail', 'v1', credentials=autho())
     # Call the Gmail API
-    results = service.users().labels().list(userId='me').execute()
+    service.users().labels().list(userId='me').execute()
     dic = sheet_to_dict(myLink)
     if dic['Email'] != None:
         for email in dic['Email'] :

@@ -3,8 +3,8 @@ from send import send
 import fileupload
 from IPython.core.display import display
 
-from tkinter import filedialog
-from tkinter import *
+from tkinter import filedialog, Tk
+
 
   
 
@@ -17,8 +17,8 @@ def fileDialog():
 # This is the uploader widget
     root = Tk()
     name =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("xlsx files","*.xlsx"),("all files","*.*")))
-    #name = root.filename
     root.destroy()
     return name
+    
 eel.init('web')
 eel.start('index.html', size=(800,700))

@@ -1,3 +1,4 @@
+var listEps;
 function print_num(n) {
     if(n==1){
         $('#goodInfos').html('<h3>Sent successfully</h3>');
@@ -72,13 +73,59 @@ function fromExpa(){
     $('#expa').css('display','block'); 
 }
 function getEps(){
-    let token = document.querySelector("#myLink").value;
+    let token = document.querySelector("#myToken").value;
     if(token=='')
     {
         $('#badInfos').html('<h3>Put your token please !</h3>')
         $('#badInfos').css('display','block');
         $('#myModal').modal('show');
     }
+    else{
+        eel.getEpsFromPython(token)(selectEps);
+    }
+}
+
+function selectEps(eps){
+    listEps = eps.split(';')
+    $('#setEps').html('<div id=\'myEps\' style="height: 300px; overflow: auto;padding:30px"></div>');
+    var i;
+    for (i = 0 ;i <listEps.length;i++){
+        text = "<div class=\"form-check\">\
+            <input class=\"form-check-input \" type=\"checkbox\"  id=\"epID"+i+"\">\
+            <label class=\"form-check-label col\" style=\"padding-left:20px;color: #fff;font-size: 2em;width:60%\"id=\"epName"+i+" for=\"epID"+i+"\">\
+            "+listEps[i]+"\
+            </label>\
+            <input class=\"form-check-input col\" type=\"datetime-local\" style=\"width:35%\"  id=\"epDate"+i+"\">\
+        </div>"
+        $('#myEps').append(text);
+    }
+    $('#expa').css('display','none');
+    $('#selectEps').css('display','block');
+}
+
+function selectToExpa(){
+    $('#selectEps').css('display','none');
+    $('#expa').css('display','block');
+}
+
+function getSelectedEps(){
+    var children = $("#myEps").children().length;
+    var i;
+    for (i =0 ;i<children;i++){
+        var id = "#epID".concat(i);
+        if($(id).is(":checked")){
+            var dateId = "epDate".concat(i);
+            var date = document.getElementById(dateId).value
+        }
+            
+    }
+    $('#selectEps').css('display','none');
+    $('#templateEmail').css('display','block');
+}
+
+function templateToSelect(){
+    $('#templateEmail').css('display','none');
+    $('#selectEps').css('display','block');
 }
 
 $('#badInfos').css('display','none');

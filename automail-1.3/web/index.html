@@ -27,6 +27,7 @@
             <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
                 <img src="img/logo.png" class="mx-auto d-block">
             </div>
+
             <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
                 <div >
                     <p style="color: #fff;font-size: 6em;font-family: oracleScript;line-height: 1em;">
@@ -37,7 +38,7 @@
                     <p style="color: #fff;font-size: 2em;">
                         Do you want to get emails from sheet or expa ?
                     </p>
-                </div>
+                </div>              
                 <div style="margin-top: 80px;">
                     <button onclick="fromExpa()" class="btn btn-white text-center border rounded" 
                         style="margin-right: 10px;height: 60px;width: 280px;" type="button">
@@ -76,6 +77,67 @@
                             <p style="font-size: 2em;color: #000">Back</p>
                         </button>
                         <button onclick="getEps()" class="btn btn-secondary text-center border rounded" 
+                            type="button" style="width: 49%;height: 50px;margin-left: 5px;" name="submit" id="submit">
+                            <p style="font-size: 2em;color: #000">Next</p>
+                        </button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <!----------------------select Eps------------------>
+        <div class="container" id="selectEps" style="display: none;">
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <img src="img/logo.png" class="mx-auto d-block">
+            </div>
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <div style="margin: 40px;">
+                    <div style="margin-top: 40px;">
+                        <p style="color: #fff;font-size: 2em;">
+                            Slecet the eps : 
+                        </p>
+                    </div>
+                    
+                    <div class="text-left" style="margin-top: 40px;" id="setEps">
+                        
+                    </div>
+                
+                    <div class="text-center" style="margin-top: 40px;">
+                        <button onclick="selectToExpa()" class="btn btn-white text-center border rounded" 
+                            style="height: 50px;width: 49%;margin-right: 5px;" type="button">
+                            <p style="font-size: 2em;color: #000">Back</p>
+                        </button>
+                        <button onclick="getSelectedEps()" class="btn btn-secondary text-center border rounded" 
+                            type="button" style="width: 49%;height: 50px;margin-left: 5px;" name="submit" id="submit">
+                            <p style="font-size: 2em;color: #000">Next</p>
+                        </button>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+        <!----------------the template for email------------>
+        <div class="container" id="templateEmail" style="display: none;">
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <img src="img/logo.png" class="mx-auto d-block">
+            </div>
+            <div class="text-center" style="margin-top: 20px;margin-bottom: 20px;">
+                <div style="margin: 40px;">
+                    <div style="margin-top: 40px;">
+                        <p style="color: #fff;font-size: 2em;">
+                            Email : 
+                        </p>
+                    </div>
+                    
+                    <div class="text-left" style="margin-top: 40px;" id="template">
+                        
+                    </div>
+                
+                    <div class="text-center" style="margin-top: 40px;">
+                        <button onclick="templateToSelect()" class="btn btn-white text-center border rounded" 
+                            style="height: 50px;width: 49%;margin-right: 5px;" type="button">
+                            <p style="font-size: 2em;color: #000">Back</p>
+                        </button>
+                        <button onclick="sendFromExpa()" class="btn btn-secondary text-center border rounded" 
                             type="button" style="width: 49%;height: 50px;margin-left: 5px;" name="submit" id="submit">
                             <p style="font-size: 2em;color: #000">Next</p>
                         </button>

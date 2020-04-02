@@ -17,6 +17,12 @@ def fileDialog():
     root.destroy()
     return name
 
+@eel.expose
+def getEpsFromPython(token):
+    return 'yasser belhimer;zaki;sido;x;y;z;r;s;b'
+
+
+
 eel.init('web')
 
 try:

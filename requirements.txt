@@ -11,3 +11,4 @@ six==1.14.0
 uritemplate==3.0.1
 Eel==0.12.2
 fileupload==0.1.5
+gevent-websocket==0.10.1

@@ -17,11 +17,20 @@ def fileDialog():
     root.destroy()
     return name
 
+# here you return the names of eps 
 @eel.expose
 def getEpsFromPython(token):
     return 'yasser belhimer;zaki;sido;x;y;z;r;s;b'
 
 
+@eel.expose
+def sendMailExpa(selectedEps,mySybject,myContent):
+    listSelectedEps = selectedEps.split(";")
+    for i in range(len(listSelectedEps)):
+        listSelectedEps[i] = listSelectedEps[i].split("#")
+    
+    print(listSelectedEps)
+    return 1
 
 eel.init('web')
 

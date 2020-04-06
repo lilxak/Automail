@@ -1,4 +1,5 @@
 var listEps;
+var selectedEps = "";
 function print_num(n) {
     if(n==1){
         $('#goodInfos').html('<h3>Sent successfully</h3>');
@@ -25,7 +26,6 @@ function sendMail(){
     else{
         eel.sendMailPy(myLink,mySubject,myContent)(print_num);
     }
-    
 }
 
 function setLink(n){
@@ -41,6 +41,23 @@ var myheight = 270;
 $(document).ready(function() {
     $('#myContent').summernote({
         height:myheight,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link']],
+            ['view', ['fullscreen', 'codeview', 'help']],
+        ],
+    });
+});
+
+var myheightExpa = 250;
+$(document).ready(function() {
+    $('#myContentExpa').summernote({
+        height:myheightExpa,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
@@ -109,23 +126,50 @@ function selectToExpa(){
 }
 
 function getSelectedEps(){
+    selectedEps = "";
     var children = $("#myEps").children().length;
     var i;
     for (i =0 ;i<children;i++){
         var id = "#epID".concat(i);
         if($(id).is(":checked")){
             var dateId = "epDate".concat(i);
-            var date = document.getElementById(dateId).value
-        }
-            
+            var date = document.getElementById(dateId).value;
+            if(selectedEps ==""){
+                selectedEps = selectedEps.concat(listEps[i]+"#"+date);
+            }
+            else{
+                selectedEps = selectedEps.concat(";"+listEps[i]+"#"+date);
+            }
+        }     
     }
-    $('#selectEps').css('display','none');
-    $('#templateEmail').css('display','block');
+    if(selectedEps ==""){
+        $('#badInfos').html('<h3>Select Eps pleas</h3>');
+        $('#badInfos').css('display','block');
+        $('#myModal').modal('show');
+    }
+    else{
+        $('#selectEps').css('display','none');
+        $('#templateEmail').css('display','block');
+    }
 }
 
 function templateToSelect(){
     $('#templateEmail').css('display','none');
     $('#selectEps').css('display','block');
+}
+
+function sendFromExpa(){
+    let mySubject = document.querySelector("#mySubjectExpa").value;
+    let myContent = document.querySelector("#myContentExpa").value;
+    if(myContent=='' || mySubject=='')
+    {
+        $('#badInfos').html('<h3>There are empty fields !</h3>')
+        $('#badInfos').css('display','block');
+        $('#myModal').modal('show');
+    }
+    else{
+        eel.sendMailExpa(selectedEps,mySubject,myContent)(print_num);
+    }
 }
 
 $('#badInfos').css('display','none');
